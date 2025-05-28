@@ -127,17 +127,21 @@
   document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
-    const phone = document.getElementById("phone").value.trim();
-    const address = document.getElementById("address").value.trim();
+    const data = {
+      name: document.getElementById("name").value.trim(),
+      email: document.getElementById("email").value.trim(),
+      phone: document.getElementById("phone").value.trim(),
+      address: document.getElementById("address").value.trim()
+    };
 
-    const content = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nAddress: ${address}`;
-    const blob = new Blob([content], { type: "text/plain" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "submission.txt";
-    link.click();
+    fetch('/save-contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(res => res.text())
+    .then(response => alert(response))
+    .catch(() => alert('Error saving data. Please try again.'));
   });
 </script>
 
