@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>About Us - Smart Bazaar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f9f9f9;
+    }
+
+    header {
+      background-color: red;
+      color: white;
+      padding: 10px 20px;
+      text-align: center;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .logo {
+      height: 50px;
+    }
+
+    .container {
+      margin-top: 80px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    form {
+      max-width: 400px;
+      margin: auto;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      box-sizing: border-box;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: red;
+      color: white;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #ffffff;
+      border-top: 1px solid #ccc;
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+      z-index: 10;
+    }
+
+    .footer-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .footer-btn img {
+      width: 28px;
+      height: 28px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="logo.png" alt="Logo" class="logo" />
+</header>
+
+<div class="container">
+  <h2>Contact Us</h2>
+  <form id="contactForm">
+    <label>Name:</label>
+    <input type="text" id="name" required />
+
+    <label>Email:</label>
+    <input type="email" id="email" required />
+
+    <label>Phone Number:</label>
+    <input type="tel" id="phone" required />
+
+    <label>Address:</label>
+    <textarea id="address" rows="4" required></textarea>
+
+    <button type="submit">Submit</button>
+  </form>
+</div>
+
+<footer class="footer">
+  <button class="footer-btn" onclick="location.href='index.html'">
+    <img src="offers.jpg" alt="Home" />
+  </button>
+  <button class="footer-btn" onclick="location.href='about.html'">
+    <img src="Aboutus.jpg" alt="About Us" />
+  </button>
+  <button class="footer-btn" onclick="location.href='index.html#store'">
+    <img src="Store.jpg" alt="Store" />
+  </button>
+</footer>
+
+<script>
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const address = document.getElementById("address").value.trim();
+
+    const content = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nAddress: ${address}`;
+    const blob = new Blob([content], { type: "text/plain" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "submission.txt";
+    link.click();
+  });
+</script>
+
+</body>
+</html>

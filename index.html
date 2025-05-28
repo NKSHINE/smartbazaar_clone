@@ -295,14 +295,31 @@
   <button class="footer-btn">
     <img src="offers.jpg" alt="Home" />
   </button>
-  <button class="footer-btn">
-    <img src="Aboutus.jpg" alt="Search" />
+  <button class="footer-btn" onclick="location.href='about.html'">
+  <img src="Aboutus.jpg" alt="Search" />
   </button>
+
   <button class="footer-btn">
     <img src="Store.jpg" alt="Profile" />
   </button>
 </footer>
 
+<!-- Hidden Form -->
+<div id="formModal" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%); background:#fff; padding:20px; border:1px solid #ccc; z-index:9999; box-shadow:0 0 10px rgba(0,0,0,0.2);">
+  <h3>Contact Form</h3>
+  <form id="contactForm">
+    <label>Name:</label><br />
+    <input type="text" id="name" required /><br /><br />
+    <label>Email:</label><br />
+    <input type="email" id="email" required /><br /><br />
+    <label>Phone:</label><br />
+    <input type="tel" id="phone" required /><br /><br />
+    <label>Address:</label><br />
+    <textarea id="address" required></textarea><br /><br />
+    <button type="submit">Submit</button>
+    <button type="button" onclick="closeForm()">Cancel</button>
+  </form>
+</div>
 
 
   </div>
@@ -359,6 +376,39 @@
 
     // Initialize first video
     showVideo(0);
+
+
+    // Show form on About Us icon click
+document.querySelectorAll('.footer-btn')[1].addEventListener('click', function () {
+  document.getElementById("formModal").style.display = "block";
+});
+
+// Close form
+function closeForm() {
+  document.getElementById("formModal").style.display = "none";
+}
+
+// Handle form submission and download .txt file
+document.getElementById("contactForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const phone = document.getElementById("phone").value;
+  const address = document.getElementById("address").value;
+
+  const textContent = `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nAddress: ${address}`;
+  const blob = new Blob([textContent], { type: "text/plain" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "contact_details.txt";
+  link.click();
+
+  closeForm(); // Close the form
+  document.getElementById("contactForm").reset(); // Reset form
+});
+
+
   </script>
 
 </body>
