@@ -10,3 +10,8 @@ Address: Dhrisya Nagar
 H.No 41,Ollukara
 Thrissur,Kerala
 ---
+Name: Neethu K Shine
+Email: devadharshinidevadharshini@gmail.com
+Phone: 09744944780
+Address: Dhrisya Nagar
+---
